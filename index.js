@@ -23,12 +23,7 @@ SOFTWARE.
 */
 
 var fs=require('fs');
-var I2c = null;
-try {
-  I2c = require('@abandonware/i2c');
-} catch(err) {
-  I2c = require('i2c');
-}
+var I2c = require('color-sensor-js/lib/i2c');
 
 var MAX_TEMP_CONVERSION     = 50;   // milliseconds
 var MAX_HUMI_CONVERSION     = 16;   // ms
@@ -59,15 +54,14 @@ htu21d.prototype.readTemperature = function(callback) {
     var that = this;
   this.i2c.write([HTU21D_READTEMP_NH], function(err, data) {
     if (err) {
-      retun callback(err, null);
+      return callback(err, null);
     } else {
         else {
             setTimeout(function() {
                 that.i2c.read(3, function(err, data) {
-                    if (err) {
-                        console.log(err);
-                        return err;
-                    } else {
+                  if (err) {
+                    return callback(err, null);
+                  } else {
                         if ((data.length === 3) && calc_crc8(data, 3)) {
                             var rawtemp = ((data[0] << 8) | data[1]) & 0xFFFC;
                             var temperature = ((rawtemp / 65536.0) * 175.72) - 46.85;
