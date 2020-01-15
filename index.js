@@ -50,7 +50,9 @@ var htu21d = function (options) {
   if (this.config.device === undefined) {
     this.config.device = '/dev/i2c-1'
   }
-  this.i2c = new I2c(HTU21D_I2CADDR, options.device);
+  this.i2c = new I2c(HTU21D_I2CADDR,
+                     { device: this.config.device }
+                    );
 };
 
 htu21d.prototype.readTemperature = function(callback) {
