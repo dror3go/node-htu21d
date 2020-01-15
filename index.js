@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 var fs=require('fs');
-var I2c = require('color-sensor-js/lib/i2c');
+var I2c = require('color-sensor-js/lib/i2c.js');
 
 var MAX_TEMP_CONVERSION     = 50;   // milliseconds
 var MAX_HUMI_CONVERSION     = 16;   // ms
