@@ -57,11 +57,10 @@ var htu21d = function (options) {
 
 htu21d.prototype.readTemperature = function(callback) {
     var that = this;
-    this.i2c.write([HTU21D_READTEMP_NH], function(err) {
-        if (err) {
-            console.log(err);
-            return err;
-        }
+  this.i2c.write([HTU21D_READTEMP_NH], function(err, data) {
+    if (err) {
+      retun callback(err, null);
+    } else {
         else {
             setTimeout(function() {
                 that.i2c.read(3, function(err, data) {
@@ -73,7 +72,7 @@ htu21d.prototype.readTemperature = function(callback) {
                             var rawtemp = ((data[0] << 8) | data[1]) & 0xFFFC;
                             var temperature = ((rawtemp / 65536.0) * 175.72) - 46.85;
                             //console.log("Temperature, C:", temperature.toFixed(1));
-                            callback(temperature.toFixed(1));
+                            callback(null, temperature.toFixed(1));
                         }
                     }
                 });
@@ -86,8 +85,7 @@ htu21d.prototype.readHumidity = function(callback) {
     var that = this;
     this.i2c.write([HTU21D_READHUMI_NH], function(err) {
         if (err) {
-            console.log(err);
-            return err;
+         return callback(err, null);
         }
         else {
             setTimeout(function() {
@@ -100,7 +98,7 @@ htu21d.prototype.readHumidity = function(callback) {
                             var rawhumi = ((data[0] << 8) | data[1]) & 0xFFFC;
                             var humidity = ((rawhumi / 65536.0) * 125.0) - 6.0;
                             //console.log("Relative Humidity, %:", humidity);
-                            callback(humidity.toFixed(1));
+                            callback(null, humidity.toFixed(1));
                         }
                     }
                 });
