@@ -56,7 +56,6 @@ htu21d.prototype.readTemperature = function(callback) {
     if (err) {
       return callback(err, null);
     } else {
-        else {
             setTimeout(function() {
                 that.i2c.read(3, function(err, data) {
                   if (err) {
