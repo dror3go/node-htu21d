@@ -21,6 +21,7 @@
   "license": "MIT",
   "homepage": "http://github.com/bbx10/node-htu21d.git",
   "dependencies": {
-    "@abandonware/i2c": ">=0.2.4-1"
+    "@abandonware/i2c": ">=0.2.4-1",
+    "color-sensor-js": "git+https://github.com/rzr/color-sensor-js.git"
   }
 }
