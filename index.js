@@ -57,7 +57,7 @@ var htu21d = function (options) {
 
 htu21d.prototype.readTemperature = function(callback) {
     var that = this;
-    this.i2c.writeByte(HTU21D_READTEMP_NH, function(err) {
+    this.i2c.write([HTU21D_READTEMP_NH], function(err) {
         if (err) {
             console.log(err);
             return err;
@@ -84,7 +84,7 @@ htu21d.prototype.readTemperature = function(callback) {
 
 htu21d.prototype.readHumidity = function(callback) {
     var that = this;
-    this.i2c.writeByte(HTU21D_READHUMI_NH, function(err) {
+    this.i2c.write([HTU21D_READHUMI_NH], function(err) {
         if (err) {
             console.log(err);
             return err;
