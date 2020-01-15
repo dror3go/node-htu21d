@@ -23,11 +23,11 @@ SOFTWARE.
 */
 
 var fs=require('fs');
-var i2c = null;
+var I2c = null;
 try {
-  i2c = require('@abandonware/i2c');
+  I2c = require('@abandonware/i2c');
 } catch(err) {
-  i2c = require('i2c');
+  I2c = require('i2c');
 }
 
 var MAX_TEMP_CONVERSION     = 50;   // milliseconds
@@ -50,7 +50,7 @@ var htu21d = function (options) {
   if (this.config.device === undefined) {
     this.config.device = '/dev/i2c-1'
   }
-  this.i2c = new i2c(HTU21D_I2CADDR, options.device);
+  this.i2c = new I2c(HTU21D_I2CADDR, options.device);
 };
 
 htu21d.prototype.readTemperature = function(callback) {
